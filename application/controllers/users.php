@@ -1,8 +1,7 @@
 <?php
 
     class Users extends CI_Controller{
-        
-        
+    
         public function login(){
                                // Regeln für Username: Leerzeichen l+r weg|Pflichtfeld|min 3 Zeichen|
             $this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[3]');
