@@ -81,7 +81,7 @@ class quiz_model extends CI_Model{
     return true;   
    }
    
-   public function getQuizId($sUserName, $sQuizName){
+   private function getQuizId($sUserName, $sQuizName){
        $sQuery = "SELECT id FROM quiz WHERE(username LIKE ? AND name LIKE ?)";
        $res = $this->db->query($sQuery, array($sUserName, $sQuizName));
        $row = $res->result();

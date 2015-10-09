@@ -25,7 +25,7 @@
                         <li class="active"><a href="">Home<span class="sr-only">(current)</span></a></li>                       
                         <li> <a href="<?php echo base_url();?>profile">Profile<span class="sr-only"></span></a></li>
                         <li> <a href="<?php echo base_url();?>quiz/create">Create<span class="sr-only"></span></a></li>                        
-                        <li> <a href="<?php echo base_url();?>profile">Quiz<span class="sr-only"></span></a></li>
+                        <li> <a href="<?php echo base_url();?>quiz/choose">Quiz<span class="sr-only"></span></a></li>
                         <li> <a href="<?php echo base_url();?>contact">Contact<span class="sr-only"></span></a></li>
                     </ul>
                     

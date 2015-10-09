@@ -54,6 +54,15 @@
                 if(isset($_POST['username'])){
                     $aData['username']= strip_tags($_POST['username']);
                 }
+                //set Cookie for user recognition
+                $time = time()+60*60*24*30; //30 Tage Laufzeit
+                $cookie = array(
+                    'name' => 'username',
+                    'value' => $aData['username'],
+                    'expire' => $time,
+                );
+  
+                set_cookie($cookie);
             }
             
             $quiz = new quiz_model;
@@ -77,6 +86,43 @@
         
         public function edit($quizId){
             echo 'edit';
+        }
+        
+        public function choose(){
+            
+            // Header + Nav
+            $this->load->view('layouts/main');
+            
+            // falls username gesetzt -> Cookie setzen + quizauswahl laden
+            if(isset($_POST['username']) && $_POST['username']!='' && strlen($_POST['username'])>=6){
+                
+                $time = time()+60*60*24*30; //30 Tage Laufzeit
+                $cookie = array(
+                    'name' => 'username',
+                    'value' => $_POST['username'],
+                    'expire' => $time,
+                );
+                set_cookie($cookie);
+                
+                $aData = array(
+                    'username' => $_POST['username']
+                );
+                $this->load->view('quiz/choosequiz', $aData);
+            }
+            
+            //if username cookie is set load quiz overview
+            if(get_cookie('username')){
+                $aData = array(
+                    'username' => get_cookie('username')
+                );
+                $this->load->view('quiz/choosequiz', $aData);
+                
+            } else {
+                // check username
+                $this->load->view('quiz/whoareyou');                
+            }
+            $this->load->view('layouts/footer');
+            
         }
         
         public function start($quizId){
