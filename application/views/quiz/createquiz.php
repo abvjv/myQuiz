@@ -1,9 +1,9 @@
-    <div class="container">
-        <div class="row">
-            <div class="col-md-offset-3 col-md-6"><h1> QuizCreator </h1></div>
-        </div>
+    
+    <div class="container" id="bg-img-container">
+        <div class="row" id="top-row-create" >
+            <div class="col-md-offset-3 col-md-6"><h2> QuizCreator </h2></div>
         
-        <div class="row">
+        
             <div class="col-md-offset-3 col-md-9">
                 <div class="alert-danger round"><?php 
                     if($this->session->flashdata('errors')){
@@ -11,6 +11,7 @@
                     }
                 echo '</div>';
                 ?>
+                    
                 <form action="/quiz/save" method="post" enctype="multipart/form-data">
                     <div class="form-group panel panel-default">
                         <div class="panel-body">

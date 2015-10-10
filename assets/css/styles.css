@@ -5,3 +5,47 @@ body{
 .round{
     border-radius: 5px;
 }
+
+.bold{
+    font-weight: bold;
+}
+
+.margin-top{
+    margin-top: 30px;
+}
+
+#bg-img-container{
+    background-image: url("../img/lp_bg.jpg");
+    height: 400px;
+    background-size:cover;
+    width: 100%;
+}
+
+.navbar{
+    margin-bottom: 0px !important;
+}
+
+#top-row{
+    margin-top: 100px; 
+}
+
+#top-row-lp{
+    margin-top: 100px; 
+    text-align: center;
+}
+
+#top-row h1{
+    font-size: 400%;
+}
+
+#top-row-lp h1{
+    font-size: 400%;
+}
+
+#top-row-create{
+    margin-top: 50px;
+}
+
+#top-row-create h2{
+    font-size: 500%;
+}

@@ -5,5 +5,5 @@
  */
 
 $(document).ready(function(){
-
+    $("#bg-img-container").css("height",$(window).height());
 });

@@ -7,4 +7,9 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteRule ^(.*)$ /index.php/$1 [L]
+	
+	RewriteCond %{HTTP_HOST} ^myquiz\.de$
+	RewriteRule (.*) http://www.myquiz.de/$1 [R=301,L]
+	RewriteRule ^$ quiz [L]
+   
 </IfModule>
