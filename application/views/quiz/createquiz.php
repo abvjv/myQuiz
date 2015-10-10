@@ -1,10 +1,12 @@
     
     <div class="container" id="bg-img-container">
         <div class="row" id="top-row-create" >
-            <div class="col-md-offset-3 col-md-6"><h2> QuizCreator </h2></div>
+            <div class="col-md-offset-3 col-md-6">
+                <h1> QuizCreator </h1>
+            </div>
         
         
-            <div class="col-md-offset-3 col-md-9">
+            <div class="col-md-offset-3 col-md-6">
                 <div class="alert-danger round"><?php 
                     if($this->session->flashdata('errors')){
                         echo $this->session->flashdata('errors');
