@@ -79,21 +79,48 @@
             $this->load->view('layouts/footer');
         }
         
-        
+        //Quiz löschen
         public function delete($quizId){
             echo 'delete';
         }
         
+        // Quiz bearbeiten
         public function edit($quizId){
             echo 'edit';
         }
         
+        // Auswahl eines Quizzes
         public function choose(){
             
             // Header + Nav
             $this->load->view('layouts/main');
             
-            // falls username gesetzt -> Cookie setzen + quizauswahl laden
+            // load quiz model
+            $quiz = new quiz_model;
+            
+            //if username cookie is set load quiz overview for this user
+            //
+
+            
+            if(get_cookie('username')){
+                
+                // get Quizzes from db
+                $aQuizData = $quiz->getQuizzesByUsername(get_cookie('username'));
+                
+                $aData = array(
+                    
+                    'username' => get_cookie('username'),
+                    'quizdata' => $aQuizData
+                );
+                $this->load->view('quiz/choosequiz', $aData);
+                
+            } else {
+                // check username
+                $this->load->view('quiz/whoareyou');                
+            }
+            $this->load->view('layouts/footer');
+            
+            // if username is set -> create Cookie and load saved quizzes
             if(isset($_POST['username']) && $_POST['username']!='' && strlen($_POST['username'])>=6){
                 
                 $time = time()+60*60*24*30; //30 Tage Laufzeit
@@ -104,28 +131,30 @@
                 );
                 set_cookie($cookie);
                 
-                $aData = array(
-                    'username' => $_POST['username']
-                );
-                $this->load->view('quiz/choosequiz', $aData);
-            }
-            
-            //if username cookie is set load quiz overview
-            if(get_cookie('username')){
-                $aData = array(
-                    'username' => get_cookie('username')
-                );
-                $this->load->view('quiz/choosequiz', $aData);
+                $aQuizData = $quiz->getQuizzesByUsername($_POST['username']);
                 
-            } else {
-                // check username
-                $this->load->view('quiz/whoareyou');                
+                $aData = array(
+                    'username' => $_POST['username'],
+                    'quizdata' => $aQuizData                      
+                );
+                
+                
+                $this->load->view('quiz/choosequiz', $aData);
             }
-            $this->load->view('layouts/footer');
-            
+                        
         }
         
-        public function start($quizId){
-            echo 'start';
+        public function start(){
+            
+            $username = $_POST['username'];
+            $quizname = $_POST['quizname'];
+            $type = $_POST['type'];
+            
+            $user = new quiz_model();
+            
+            // Here Call to Model function to retrieve the Quizdetails
+            $aQuiz->getQuizData($userName, $quizname);
+
+            // continue here by Loading view with submitted Data
         }
     }

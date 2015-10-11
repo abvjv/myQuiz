@@ -18,10 +18,10 @@
                     <div class="form-group panel panel-default">
                         <div class="panel-body">
                             <label for="quizname"><h3> Choose the Name of the quiz and your Username</h3></label>
-                            <input type="text" name="quizname" class="form-control" id="quizname" placeholder="Quizname">
+                            <input type="text" name="quizname" class="form-control" id="quizname" placeholder="Quizname" required="required">
                         </div>
                         <div class="panel-body">
-                            <input type="text" name="username" class="form-control" id="username" placeholder="Username">
+                            <input type="text" name="username" class="form-control" id="username" placeholder="Username" required="required">
                             <span id="helpBlock" class="help-block"> The quiz will be saved for your username </span>
                         </div>
                     </div>
@@ -33,7 +33,7 @@
                                 Vocabulary Test
                             </label><br/>
                             <label>
-                                <input type="radio" name="quiztype" id="multiplechoice" value="multiplechoice" checked>
+                                <input type="radio" name="quiztype" id="multiplechoice" value="multiplechoice">
                                 Multiple Choice Test
                             </label> 
                         </div>
@@ -42,13 +42,14 @@
                         <div class="panel-body">
                             <h3> Upload CSV File with your MC Questions or Vocabulary </h3>
                             <label for="testfile">  </label>
-                            <input type="file" name="testfile" id="testfile" accept=".csv"/>
+                            <input type="file" name="testfile" id="testfile" accept=".csv" required="required"/>
                             <span id="helpBlock" class="help-block"> File must be .csv </span>
                             <span class="help-block"> Format for Vocabulary: vocabulary1;translation1 example: sledgehammer;Vorschlaghammer </span>
                             <span class="help-block"> Format for MC: "question;answer1;answer2;answer3;answer4;number of correct answer" | example: "What is the Capital of Germany?;Bonn;Berlin;Hamburg;Munich;2"</span>
                         </div>
+                    
+                        <button type="submit" class="btn btn-primary" value="submit" id="submitbutton">Submit</button>
                     </div>
-                    <button type="submit" class="btn btn-primary" value="submit">Submit</button>
                 </form>
             </div>
         </div>       

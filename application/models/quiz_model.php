@@ -2,9 +2,9 @@
 
 class quiz_model extends CI_Model{
     
+    // save Quiz to database
     public function save($aData){
         
-
         $sQuizType = $aData['quiztype'];
        
         // processing MC 
@@ -41,6 +41,7 @@ class quiz_model extends CI_Model{
         }
    }
    
+   //Helper function for save() to write Vocabulary data into Database
    private function saveVoc($aData){
         //data
         $sQuizName = $aData['quizname'];
@@ -81,6 +82,7 @@ class quiz_model extends CI_Model{
     return true;   
    }
    
+   // helper function for getVoc() to get the Id of a specific quiz
    private function getQuizId($sUserName, $sQuizName){
        $sQuery = "SELECT id FROM quiz WHERE(username LIKE ? AND name LIKE ?)";
        $res = $this->db->query($sQuery, array($sUserName, $sQuizName));
@@ -93,5 +95,23 @@ class quiz_model extends CI_Model{
                 die("There was an error");
             }       
         }
+   }
+   
+   // Get all quizzes stored in db, for a given username
+   public function getQuizzesByUsername($sUsername){
+       $sQuery = 'SELECT * FROM quiz WHERE username LIKE ?';
+       $result = $this->db->query($sQuery, array($sUsername));
+       $aResult = $result->result_array();
+       
+       return $aResult;
+   }
+   
+   // Get the Quizdata for Display
+   public function getQuizData($sUserName, $sQuizname){
+       
+       //get QuizId
+       $quizId = $this->getQuizId($username, $quizname);
+       
+       // continue here by fetching the data
    }
 }
