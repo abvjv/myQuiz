@@ -146,15 +146,19 @@
         
         public function start(){
             
-            $username = $_POST['username'];
-            $quizname = $_POST['quizname'];
+            $userName = $_POST['username'];
+            $quizName = $_POST['quizname'];
             $type = $_POST['type'];
             
-            $user = new quiz_model();
+            $oQuiz = new quiz_model();
             
             // Here Call to Model function to retrieve the Quizdetails
-            $aQuiz->getQuizData($userName, $quizname);
-
+            $aQuiz = $oQuiz->getQuizData($userName, $quizName, $type);
+            
+            $this->load->view('layouts/main');
+            $this->load->view('quiz/playquiz', $aQuiz);
+            $this->load->view('layouts/footer');
+            
             // continue here by Loading view with submitted Data
         }
     }

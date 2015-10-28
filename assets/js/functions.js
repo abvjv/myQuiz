@@ -4,6 +4,17 @@
  * and open the template in the editor.
  */
 
+// Set BG Image height
 $(document).ready(function(){
     $("#bg-img-container").css("height",$(window).height());
+    
+    
+    
+    $('.answer').click(function(){
+        
+        $('.answer').removeClass('btn-info').addClass('btn-primary');
+        $(this).removeClass('btn-primary').addClass('btn-info');        
+
+    });
 });
+

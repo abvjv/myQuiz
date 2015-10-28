@@ -107,11 +107,71 @@ class quiz_model extends CI_Model{
    }
    
    // Get the Quizdata for Display
-   public function getQuizData($sUserName, $sQuizname){
+   public function getQuizData($sUserName, $sQuizname, $type){
        
        //get QuizId
-       $quizId = $this->getQuizId($username, $quizname);
+       $quizId = $this->getQuizId($sUserName, $sQuizname);
        
+       // check quiztype
+       if($type == 'vocabulary'){
+           $aQuizData['data'] = $this->getVocabulary($quizId);
+       } else if($type == 'multiplechoice'){
+           $aQuizData['data'] = $this->getMc($quizId);
+       } else{
+           exit('There was an error - Quiz type not valid');
+       }
        // continue here by fetching the data
+       
+       $aQuizData['quizname']= $sQuizname;
+       $aQuizData['type'] = $type;
+       return $aQuizData;
+   }
+   
+   
+   private function getMc($quizId){
+       
+       //get MC Questions
+       $sQuery = 'SELECT * FROM mc_question m, quiz_to_questions q  WHERE q.quizid=? AND q.questionid = m.id';
+       $result = $this->db->query($sQuery, $quizId);
+       
+       if($result->num_rows()>0){
+           foreach($result->result() as $row){
+               $aData['id'] = $row->id;
+               $aData['question'] = $row->question;
+               $aData['answer1'] = $row->answer1;
+               $aData['answer2'] = $row->answer2;
+               $aData['answer3'] = $row->answer3;
+               $aData['answer4'] = $row->answer4;
+               $aData['correct'] = $row->answer4;
+               $aData['random'] = $this->picRandom(1,4);
+               $aResult[] = $aData;
+           }
+       }
+       $aResult = $result->result_array();
+       return $aResult;
+   }
+   
+   private function getVocabulary($quizId){
+       //get Vocabulary
+       $sQuery = 'SELECT * FROM vocabulary v, quiz_to_questions q  WHERE q.quizid=? AND q.questionid = v.id';
+       //echo $sQuery; exit;
+       $result = $this->db->query($sQuery, $quizId);
+       
+       if($result->num_rows()>0){
+           foreach($result->result() as $row){
+               $aData['id'] = $row->id;
+               $aData['vocabulary'] = $row->vocabulary;
+               $aData['translation'] = $row->translation;
+               $aData['random'] = $this->picRandom(1,2);
+               $aResult[] = $aData;
+           }
+       }
+       return $aResult;
+   }
+   
+   private function picRandom($min, $max){
+       $random = rand($min, $max);
+       
+       return $random;
    }
 }
