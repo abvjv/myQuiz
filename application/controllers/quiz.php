@@ -99,8 +99,6 @@
             $quiz = new quiz_model;
             
             //if username cookie is set load quiz overview for this user
-            //
-
             
             if(get_cookie('username')){
                 
@@ -145,7 +143,6 @@
         }
         
         public function start(){
-            
             $userName = $_POST['username'];
             $quizName = $_POST['quizname'];
             $type = $_POST['type'];

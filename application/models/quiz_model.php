@@ -20,12 +20,28 @@ class quiz_model extends CI_Model{
         }   
    }
    
-   // Under COnstruction
+   // Helper Function for Saving Multiple Choice
    private function saveMc($aData){
         //data
         $sQuizName = $aData['quizname'];
         $sUserName = $aData['username'];
+        $sQuizType = $aData['quiztype'];
         $aFileData = $aData['filecontent'];
+        
+        //check if this quiz exists already
+        $sQuery = "SELECT * FROM quiz WHERE(username LIKE ? AND name LIKE ?)";
+        $result = $this->db->query($sQuery, array($sUserName, $sQuizName));
+        if($result->num_rows()>0){
+            // Quiz already exists
+            
+        } else{
+            //Create Quiz in DB
+            $sQuery = 'INSERT INTO quiz(name, username, type) VALUES(?,?,?)';
+            $this->db->query($sQuery, array($sQuizName, $sUserName, $sQuizType));
+        }
+        
+        //get Quiz Id
+        $quizId = (int) $this->getQuizId($sUserName, $sQuizName);
         
         foreach($aFileData as $data){
                 
@@ -36,9 +52,18 @@ class quiz_model extends CI_Model{
             $aAnswer['3'] = strip_tags($aMcData['3']);                
             $aAnswer['4'] = strip_tags($aMcData['4']);
             $iCorrect = (int) strip_tags($aMcData['5']);
+            
+            $sQuery = 'INSERT INTO mc_question(question, answer1, answer2, answer3, answer4, correct) VALUES(?,?,?,?,?,?)';
+            $this->db->query($sQuery, array($sQuestion, $aAnswer['1'], $aAnswer['2'], $aAnswer['3'], $aAnswer['4'], $iCorrect));
+            // save Id of the inserted question / vocabularies
+            $questionId = (int) $this->db->insert_id();
+            
+            //Insert into connecting Database
+            $sQuery2 = 'INSERT INTO quiz_to_questions(quizid, questionid) VALUES(?,?)';
+            $this->db->query($sQuery2, array($quizId, $questionId));
         
-            echo $aAnswer['3'];
         }
+        return true;
    }
    
    //Helper function for save() to write Vocabulary data into Database

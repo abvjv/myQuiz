@@ -21,7 +21,8 @@
                             <input type="text" name="quizname" class="form-control" id="quizname" placeholder="Quizname" required="required">
                         </div>
                         <div class="panel-body">
-                            <input type="text" name="username" class="form-control" id="username" placeholder="Username" required="required">
+                            <input type="text" name="username" class="form-control" id="username" placeholder="Username" required="required" value= 
+                                <?php if(get_cookie('username')){ echo '"'. get_cookie('username'). '"';}?> >
                             <span id="helpBlock" class="help-block"> The quiz will be saved for your username </span>
                         </div>
                     </div>

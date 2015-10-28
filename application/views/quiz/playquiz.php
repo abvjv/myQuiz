@@ -9,7 +9,8 @@
 
 
     <div class="col-md-offset-3 col-md-6">
-        <h2> Die Frage steht hier </h2>
+        
+        <h2> Hier steht die Frage </h2>
         <br/>
         <form action="/quiz/evaluate" method="post">
             <div class="row">  
@@ -40,7 +41,7 @@
     <div class="col-md-offset-3 col-md-6">
         <h2> Vocabulary Test</h2>                
         <form action="/quiz/evaluate" method="post">
-            <div class="form-group panel panel-default">
+            <div class="form-group">
                 <div class="row">  
                     <div class=" col-md-3">
                         
