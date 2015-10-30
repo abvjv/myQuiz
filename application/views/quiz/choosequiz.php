@@ -24,19 +24,15 @@
                     //String for Submit Form and Button
                     $sHtmlFormString = '<form action="/quiz/start" method="post">';
                     $sHtmlFormString .= '<div class="form-group">';
-                    $sHtmlFormString.= '<input type="hidden" name="username" value="' .$username . '"></div>';
-                    $sHtmlFormString.= '<input type="hidden" name="type" value="placeholder_type"></div>';
+                    $sHtmlFormString.= '<input type="hidden" name="username" value="' .$username . '">';
+                    $sHtmlFormString.= '<input type="hidden" name="type" value="placeholder_type">';
                     $sHtmlFormString.= '<input type="hidden" name="quizname" value="placeholder_name">';
-                    $sHtmlFormString.= '<button class="btn btn-default">Start!</button></form>';
+                    $sHtmlFormString.= '<button class="btn btn-default">Start!</button></form></div>';
                     
                     foreach($quizdata as $quiz){
-                        
-                        //hidden field type und name ersetzen
-                        $sHtmlFormString = str_replace("placeholder_type" , $quiz["type"], $sHtmlFormString);
-                        $sHtmlFormString = str_replace('multiplechoice' , $quiz["type"], $sHtmlFormString);
-                        $sHtmlFormString = str_replace('vocabulary' , $quiz["type"], $sHtmlFormString);
-                        
-                        $sHtmlFormString = preg_replace('/name=\"quizname\" value=\".*\"/', 'name="quizname" value="'. $quiz['name']. '"/></div><button class="btn btn-default"', $sHtmlFormString);
+                                               
+                        $sHtmlFormString = preg_replace('/name=\"type\" value=\".*?\"/', 'name="type" value="'. $quiz['type'].'"' , $sHtmlFormString);
+                        $sHtmlFormString = preg_replace('/name=\"quizname\" value=\".*?\"/', 'name="quizname" value="'. $quiz['name'].'"' , $sHtmlFormString);
                                      
                         echo '<tr class="active">';
                         echo '<td>'. $i .' </td>';

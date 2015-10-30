@@ -79,3 +79,11 @@ body{
     text-align: center;
     font-weight: bold;
 }
+
+.invisibleMc{
+    display: none;
+}
+
+.invisibleVoc{
+    display: none;
+}
